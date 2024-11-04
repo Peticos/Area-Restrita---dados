@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <!-- Ícone -->
-    <link rel="icon" href="../../assets/images/logo_app_branco.png">
+    <link rel="icon" href="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}">
     <title>Dados - Área Restrita - Peticos</title>
 </head>
 <body>
     <header>
-        <img src="../assets/images/logo_app_branco.png">
+        <img src="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}">
         <ul class="menu">
             <li>
                 <a href="" class="menu-item" id="crud">CRUD</a>
@@ -22,7 +22,7 @@
                 <a href="../dash-publico-alvo/index.html" class="menu-item" id="publico-alvo">Público alvo</a>
             </li>
             <li>
-                <a href="../previsao-de-users/index.html" class="menu-item" id="previsao-user">Previsão de usuário</a>
+                <a href="../previsao-de-users/templates/index.html" class="menu-item" id="previsao-user">Previsão de usuário</a>
             </li>
         </ul>
     </header>
