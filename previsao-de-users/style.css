@@ -1,0 +1,68 @@
+@import url(../assets/cssGlobal.css);
+
+#previsao-user{
+    color: var(--off-white);
+    text-decoration: underline;
+}
+
+.invisivel{
+    display: none;
+}
+
+.formulario{
+    background-color: var(--beige);
+
+    width: 88%;
+    padding: 2rem 1rem 2rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-item{
+    width: 88%;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.form-item label{
+    font-family: var(--lilita-one);
+    color: var(--water-blue);
+    font-size: 20px;
+}
+
+.input{
+    padding: 1rem;
+    font-family: var(--varela-round);
+    border-radius: 16px;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.input select:focus{
+    border: none;
+    outline: none;
+}
+
+.btnForm{
+    border: none;
+    width: 30vw;
+    height: 10vh;
+    font-family: var(--lilita-one);
+    font-size: 20px;
+    color: var(--off-white);
+    border-radius: 20px;
+    background-color: var(--is-it-green);
+}
