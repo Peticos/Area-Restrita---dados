@@ -9,10 +9,14 @@
 </head>
 <body>
     <header>
-        <img src="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}">
+        <img src="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}" class="logo">
+        <img src="{{ url_for('static', filename='assets/images/menu.png')}}" class="menu-icon" onClick="toggleMenu()">
         <ul class="menu">
             <li>
-                <a href="" class="menu-item" id="crud">CRUD</a>
+                <a href="https://peticos.onrender.com/" class="menu-item" id="crud">Landing page</a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" id="previsao-user">Previsão de usuário</a>
             </li>
             <li>
                 <a href="{{ url_for('possiveis_users') }}" class="menu-item" id="possiveis-users">Possíveis usuários</a>
@@ -20,9 +24,7 @@
             <li>
                 <a href="{{ url_for('publico_alvo') }}" class="menu-item" id="publico-alvo">Público alvo</a>
             </li>
-            <li>
-                <a href="#" class="menu-item" id="previsao-user">Previsão de usuário</a>
-            </li>
+    
         </ul>
     </header>
     <main>
@@ -34,7 +36,7 @@
             <form action="" class="formulario">
                 <div class="form-item">
                     <label for="">Idade</label>
-                    <input type="text" placeholder="Idade" class="input">
+                    <input type="number" placeholder="Idade" class="input">
                 </div>
                 <div class="form-item">
                     <label for="">Gênero</label>
@@ -47,7 +49,7 @@
                 </div>
                 <div class="form-item">
                     <label for="">Tempo diário médio em redes sociais</label>
-                    <input type="text" name="" id="" class="input" placeholder="Tempo médio em redes sociais">
+                    <input type="number" name="" id="" class="input" placeholder="Tempo médio em redes sociais">
                 </div>
                 <div class="form-item">
                     <label for="">Pessoas que vivem em sua casa</label>
@@ -140,7 +142,7 @@
                     </select>
                 </div>
                 <div class="form-item">
-                    <label for="">Sentimento ao ver fotos de animais (nota de 1 a 5)</label>
+                    <label for="">Nível de felicidade ao ver fotos de animais (nota de 1 a 5)</label>
                     <select id="sentimento" name="sentimento" class="input" required>
                         <option value="" disabled selected>1 | 2 | 3 | 4 | 5</option>
                         <option value="1">1</option>
