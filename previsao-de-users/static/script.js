@@ -149,8 +149,30 @@ function salvarDados() {
     window.alert('Dados salvos com sucesso!');
 }
 
-// Adicionando um evento ao botão de finalizar
+function enviarDadosAoServidor() {
+    const dados = localStorage.getItem('dadosPessoais');
+    
+    if (dados) {
+        fetch('http://localhost:5000/', { // Altere para o endereço correto do servidor
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ dados: JSON.parse(dados) })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Dados enviados com sucesso:", data);
+        })
+        .catch((error) => {
+            console.error("Erro ao enviar dados:", error);
+        });
+    }
+}
+
+// Chame essa função ao clicar no botão finalizar ou em outro evento relevante
 document.getElementById('btnFim').addEventListener('click', function(event) {
-    event.preventDefault(); // Previne o envio padrão do formulário
-    salvarDados(); // Chama a função para salvar os dados
+    event.preventDefault();
+    salvarDados(); // Primeiro, salva os dados no localStorage
+    enviarDadosAoServidor(); // Depois, envia os dados ao servidor
 });

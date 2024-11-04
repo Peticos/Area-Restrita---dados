@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="../../assets/images/logo_app_branco.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}">
     <title>Dados - Área Restrita - Peticos</title>
 </head>
 <body>
     <header>
-        <img src="../assets/images/logo_app_branco.png">
+        <img src="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}">
         <ul class="menu">
             <li>
                 <a href="" class="menu-item" id="crud">CRUD</a>
             </li>
             <li>
-                <a href="../dash-possiveis-users/index.html" class="menu-item" id="possiveis-users">Possíveis usuários</a>
+                <a href="../../dash-possiveis-users/index.html" class="menu-item" id="possiveis-users">Possíveis usuários</a>
             </li>
             <li>
-                <a href="../dash-publico-alvo/index.html" class="menu-item" id="publico-alvo">Público alvo</a>
+                <a href="../../dash-publico-alvo/index.html" class="menu-item" id="publico-alvo">Público alvo</a>
             </li>
             <li>
-                <a href="../previsao-de-users/index.html" class="menu-item" id="previsao-user">Previsão de usuário</a>
+                <a href="../../previsao-de-users/index.html" class="menu-item" id="previsao-user">Previsão de usuário</a>
             </li>
         </ul>
     </header>
@@ -131,8 +131,11 @@
                 <div class="form-item">
                     <label for="">Reportaria caso encontrasse um animal abandonado</label>
                     <select id="reportaria" name="reportaria" class="input" required>
-                        <option value="" disabled selected>Sim | Não</option>
+                        <option value="" disabled selected>Sim | Provavelmente Sim | Talvez | Provavelmente Não | Não</option>
                         <option value="sim">Sim</option>
+                        <option value="provavelmente_sim">Provavelmente Sim</option>
+                        <option value="sim">Talvez</option>
+                        <option value="provavelmente_nao">Provavelmente Não</option>
                         <option value="nao">Não</option>
                     </select>
                 </div>
@@ -151,6 +154,6 @@
             </form>
         </section>
     </main>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
