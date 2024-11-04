@@ -4,11 +4,19 @@ from script import predict
 app = Flask(__name__)
 rename_map = {'idade': 'age', 'genero': 'gender', 'tempoRedesSociais': 'time_in_social_media', 'pessoasEmCasa': 'people_living_together', 'rendaFamiliar': 'social_class', 'temPets': 'has_pets', 'quantidadePets': 'number_of_pets', 'temCachorro': 'has_dog', 'temGato': 'has_cat', 'temOutros': 'has_others', 'esqueceTarefas': 'forgets', 'reportaria': 'report_abandoned', 'sentimento': 'feeling'}
 
-@app.route('/')
+@app.route('/possiveis-users')
+def possiveis_users():
+    return render_template('dash-possiveis-users.html')
+
+@app.route('/publico-alvo')
+def publico_alvo():
+    return render_template('dash-publico-alvo.html')
+
+@app.route('/previsao-user')
 def home():
     return render_template('index.html')  # Renders the HTML page
 
-@app.route('/', methods=['POST'])
+@app.route('/previsao-user', methods=['POST'])
 def receber_dados():
     dados = request.json.get('dados')
     print(dados)
