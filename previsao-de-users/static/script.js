@@ -170,6 +170,11 @@ function enviarDadosAoServidor() {
     }
 }
 
+function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+
 // Chame essa função ao clicar no botão finalizar ou em outro evento relevante
 document.getElementById('btnFim').addEventListener('click', function(event) {
     event.preventDefault();
