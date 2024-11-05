@@ -1,6 +1,0 @@
-@import url(../previsao-de-users/static/assets/cssGlobal.css);
-
-#possiveis-users{
-    color: var(--off-white);
-    text-decoration: underline;
-}

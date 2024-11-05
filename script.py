@@ -31,8 +31,8 @@ def treat_df(df:pd.DataFrame):
 
     ## coluna social_class
     df.loc[df['social_class'].str.strip() == 'menos_000', 'social_class'] = '1'
-    df.loc[df['social_class'].str.strip() == 'entre3000_7000', 'social_class'] = '2'
-    df.loc[df['social_class'].str.strip() == 'entre_7000_R10000', 'social_class'] = '3'
+    df.loc[df['social_class'].str.strip() == 'entre_3000_7000', 'social_class'] = '2'
+    df.loc[df['social_class'].str.strip() == 'entre_7000_10000', 'social_class'] = '3'
     df.loc[df['social_class'].str.strip() == 'entre_10000_22000', 'social_class'] = '4'
     df.loc[df['social_class'].str.strip() == 'mais_22000', 'social_class'] = '5'
 
@@ -61,6 +61,8 @@ def predict(dictionary:str):
 
     df = treat_df(pd.DataFrame(x))
 
-    return int(model.predict(df)[0])
+    percent = round(model.predict_proba(df)[0][1]*100, 2)
+    
+    return percent, percent>=50
 
 # print(predict("{age:20,gender:Masculino,time_in_social_media:2,people_living_together:4,social_class:Entre 3000 e 7000,has_pets:Não,number_of_pets:0,has_dog:Não,has_cat:Não,has_others:Não,forgets:Não,report_abandoned:Talvez,feeling:2}", model))

@@ -3,26 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-possiveis-users.css') }}">
     <!-- Ícone -->
     <link rel="icon" href="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}">
     <title>Dados - Área Restrita - Peticos</title>
 </head>
 <body>
     <header>
-        <img src="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}">
+        <img src="{{ url_for('static', filename='assets/images/logo_app_branco.png') }}" class="logo">
+        <img src="{{ url_for('static', filename='assets/images/menu.png')}}" class="menu-icon" onClick="toggleMenu()">
         <ul class="menu">
             <li>
-                <a href="" class="menu-item" id="crud">CRUD</a>
+                <a href="{{ url_for('home') }}" class="menu-item" id="previsao-user">Previsão de usuário</a>
             </li>
             <li>
-                <a href="../dash-possiveis-users/index.html" class="menu-item" id="possiveis-users">Possíveis usuários</a>
+                <a href="#" class="menu-item" id="possiveis-users">Possíveis usuários</a>
             </li>
             <li>
-                <a href="../dash-publico-alvo/index.html" class="menu-item" id="publico-alvo">Público alvo</a>
-            </li>
-            <li>
-                <a href="../previsao-de-users/templates/index.html" class="menu-item" id="previsao-user">Previsão de usuário</a>
+                <a href="{{ url_for('publico_alvo') }}" class="menu-item" id="publico-alvo">Público alvo</a>
             </li>
         </ul>
     </header>
@@ -39,5 +37,6 @@
             allowFullScreen="true">
         </iframe>
     </main>
+    <script src="{{ url_for('static', filename='script-possiveis-users.js') }}"></script>
 </body>
 </html>
