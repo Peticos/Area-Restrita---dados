@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+import pickle
 from script import predict
 
 app = Flask(__name__)
@@ -25,9 +26,7 @@ def receber_dados():
     result = predict(dados)
     print(result)
     
-    return f'''
-           <div style="width: 50vw; height: 50vh; background-color: white; postition:absolute">{result}</div>
-           '''
+    return jsonify({'percentage': result[0], 'would_use': int(result[1])})
 
 if __name__ == '__main__':
     app.run(debug=True)

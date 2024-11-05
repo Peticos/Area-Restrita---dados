@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const forms = document.querySelectorAll(".formulario");
     const nextButtons = document.querySelectorAll(".btnForm");
-    const finalizeButton = document.getElementById("finalizeButton"); // ID do botão "Finalizar"
+    const finalizeButton = document.getElementById("btnFim"); // ID do botão "Finalizar"
     
     // Oculta todos os formulários, exceto o primeiro
     for (let i = 1; i < forms.length; i++) {
@@ -63,49 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         });
-
-        const inputs = button.closest(".formulario").querySelectorAll(".input");
-        const selects = button.closest(".formulario").querySelectorAll("select");
-        
-        [...inputs, ...selects].forEach((element) => {
-            element.addEventListener("input", () => {
-                button.disabled = !checkInputs(currentForm);
-            });
-        });
     });
 
     // Função para salvar todas as respostas no localStorage ao clicar em "Finalizar"
     finalizeButton.addEventListener("click", (event) => {
         event.preventDefault();
-        
-        // Aqui você pode adicionar uma lógica para exibir uma mensagem ou redirecionar o usuário
-        alert("Respostas salvas com sucesso!");
-    });
-
-    // Exibir respostas ao clicar no título
-    document.getElementById('perguntasFinais').addEventListener('click', function() {
-        const respostasSalvas = JSON.parse(localStorage.getItem('respostas'));
-
-        if (respostasSalvas) {
-            const respostasContainer = document.getElementById('respostasContainer');
-            respostasContainer.innerHTML = ''; // Limpa o conteúdo anterior
-
-            for (const [key, value] of Object.entries(respostasSalvas)) {
-                const respostaDiv = document.createElement('div');
-                respostaDiv.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`;
-                respostasContainer.appendChild(respostaDiv);
-            }
-
-            // Mostra a seção de respostas
-            document.getElementById('respostas').style.display = 'block';
-        } else {
-            alert("Nenhuma resposta encontrada.");
-        }
     });
 });
-
-// script.js
-
 // Função para salvar dados no localStorage
 function salvarDados() {
     // Capturando os valores dos campos
@@ -153,22 +117,37 @@ function enviarDadosAoServidor() {
     const dados = localStorage.getItem('dadosPessoais');
     
     if (dados) {
-        fetch('http://localhost:5000/', { // Altere para o endereço correto do servidor
+        console.log(dados)
+        fetch('http://localhost:5000/previsao-user', { // Altere para o endereço correto do servidor
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ dados: JSON.parse(dados) })
+            body: JSON.stringify({ dados: JSON.parse(dados) }) // Aqui você envia os dados
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na rede');
+            }
+            return response.json(); // Espera o JSON da resposta
+        })
         .then(data => {
-            console.log("Dados enviados com sucesso:", data);
+            if(data.would_use == 1){
+                window.alert("o entrevistado é um potencial usuário do aplicativo! Ele tem "+data.percentage+"% de chance de usá-lo!"); 
+            }else{
+                window.alert("E entrevistado não é um potencial usuário do aplicativo! Ele tem "+data.percentage+"% de chance de usá-lo!"); 
+            }
+           // Exibe o resultado da IA
         })
         .catch((error) => {
             console.error("Erro ao enviar dados:", error);
+            console.log("dados:" + JSON.parse(dados))
         });
+    } else {
+        console.error("Nenhum dado encontrado no localStorage.");
     }
 }
+
 
 function toggleMenu() {
     const menu = document.querySelector('.menu');
