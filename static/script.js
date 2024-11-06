@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (checkInputs(currentForm)) {
                 // Exibe o próximo formulário
                 if (index + 1 < forms.length) {
-                    forms[index + 1].classList.remove('.invisivel');
+                    forms[index + 1].classList.remove('invisivel');
                 }
             } else {
                 const camposVazios = [];
@@ -115,34 +115,42 @@ function salvarDados() {
 
 function enviarDadosAoServidor() {
     const dados = localStorage.getItem('dadosPessoais');
+
+    if (!dados) {
+        console.error("Nenhum dado encontrado no localStorage.");
+        return;
+    }
+
+    const dadosObjeto = JSON.parse(dados);
+
     
     if (dados) {
         console.log(dados)
-        fetch('http://localhost:5000/previsao-user', { // Altere para o endereço correto do servidor
+        fetch(`${window.location.origin}/previsao-user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ dados: JSON.parse(dados) }) // Aqui você envia os dados
+            body: JSON.stringify({ dados: dadosObjeto })
         })
         .then(response => {
             if (!response.ok) {
+                console.error("Erro na resposta do servidor:", response.statusText);
                 throw new Error('Erro na rede');
             }
             return response.json(); // Espera o JSON da resposta
         })
         .then(data => {
-            if(data.would_use == 1){
-                window.alert("o entrevistado é um potencial usuário do aplicativo! Ele tem "+data.percentage+"% de chance de usá-lo!"); 
-            }else{
-                window.alert("E entrevistado não é um potencial usuário do aplicativo! Ele tem "+data.percentage+"% de chance de usá-lo!"); 
+            if (data.would_use == 1) {
+                window.alert("O entrevistado é um potencial usuário do aplicativo! Ele tem " + data.percentage + "% de chance de usá-lo!");
+            } else {
+                window.alert("O entrevistado não é um potencial usuário do aplicativo! Ele tem " + data.percentage + "% de chance de usá-lo!");
             }
-           // Exibe o resultado da IA
         })
         .catch((error) => {
             console.error("Erro ao enviar dados:", error);
-            console.log("dados:" + JSON.parse(dados))
-        });
+            console.log("Dados enviados:", dadosObjeto);
+        });        
     } else {
         console.error("Nenhum dado encontrado no localStorage.");
     }

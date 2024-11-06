@@ -24,13 +24,16 @@ def index():
 @app.route('/previsao-user', methods=['POST'])
 def receber_dados():
     dados = request.json.get('dados')
-    print(dados)
+    print("Dados recebidos:", dados)  # Adicione para depuração
+    if not dados:
+        return jsonify({'error': 'Nenhum dado recebido'}), 400
     for old_key, new_key in rename_map.items():
-        dados[new_key] = dados.pop(old_key)
+        if old_key in dados:
+            dados[new_key] = dados.pop(old_key)
     result = predict(dados)
-    print(result)
-    
+    print("Resultado da previsão:", result)
     return jsonify({'percentage': result[0], 'would_use': int(result[1])})
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host="0.0.0.0")
