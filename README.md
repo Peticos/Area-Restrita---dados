@@ -3,8 +3,6 @@
 ## Índice
 - [Visão Geral](#visão-geral)
 - [Funcionalidades Principais](#funcionalidades-principais)
-- [Instalação](#instalação)
-- [Convenção de Branches](#convenção-de-branches)
 - [Equipe](#equipe)
 
 ## Visão Geral
